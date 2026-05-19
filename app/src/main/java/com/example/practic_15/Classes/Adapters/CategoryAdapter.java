@@ -25,7 +25,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     private Drawable BackgroundSelect; // задний фон, выбранной категории
 
     // конструктор
-    CategoryAdapter(Context context, List<Category> categorys, IOnClickInterface onClickInterface) {
+    public CategoryAdapter(Context context, List<Category> categorys, IOnClickInterface onClickInterface) {
         this.Inflater = LayoutInflater.from(context); // инициализируем
         this.Categorys = categorys; // получаем категории, и запоминаем их в переменную
         BackgroundSelect = ContextCompat.getDrawable(context, R.drawable.item_category_background_select); // получаем файл заднего фона

@@ -18,7 +18,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     private LayoutInflater Inflater; // класс позволяющий из содержимого, создать View элемент
     private List<Item> Items; // список объектов
 
-    ItemAdapter(Context context, List<Item> items) {
+    public ItemAdapter(Context context, List<Item> items) {
         this.Inflater = LayoutInflater.from(context); // инициализируем
         this.Items = items; // запоминаем объекты в переменную
     }
