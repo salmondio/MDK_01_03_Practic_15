@@ -1,4 +1,4 @@
-package com.example.practic_15.Classes;
+package com.example.practic_15.Classes.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -11,6 +11,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.practic_15.Classes.Models.Category;
+import com.example.practic_15.Classes.IOnClickInterface;
 import com.example.practic_15.R;
 
 import java.util.List;

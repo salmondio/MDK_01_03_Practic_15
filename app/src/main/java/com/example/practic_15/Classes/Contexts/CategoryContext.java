@@ -1,4 +1,6 @@
-package com.example.practic_15.Classes;
+package com.example.practic_15.Classes.Contexts;
+
+import com.example.practic_15.Classes.Models.Category;
 
 import java.util.ArrayList;
 

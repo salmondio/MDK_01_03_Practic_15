@@ -1,4 +1,4 @@
-package com.example.practic_15.Classes;
+package com.example.practic_15.Classes.Models;
 
 public class Category {
     public int Id;
