@@ -1,5 +1,7 @@
 package com.example.practic_15.Activities;
 
+import static com.example.practic_15.Activities.MainActivity.init;
+
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -71,7 +73,7 @@ public class PopularActivity extends AppCompatActivity {
             Items = (IdCategory == -1) ? ItemContext.All() : ItemContext.GetByCategory(IdCategory);
 
             CardList.setLayoutManager(new GridLayoutManager(this, 2)); // задаём два столбца для товаров
-            ItemAdapter CardAdapter = new ItemAdapter(this, Items); // создаём адаптер для товаров
+            ItemAdapter CardAdapter = new ItemAdapter(this, Items, init.AddBasket); // создаём адаптер для товаров
             CardList.setAdapter(CardAdapter); // устанавливаем адаптер
         }
     }
@@ -90,7 +92,7 @@ public class PopularActivity extends AppCompatActivity {
             TvNamePage.setText(SelectCategory.Name); // меняем наименование страницы
 
             Items = ItemContext.GetByCategory(SelectCategory.Id); // получаем товары категории
-            ItemAdapter CardAdapter = new ItemAdapter(Context, Items); // создаём адаптер с новыми товарами
+            ItemAdapter CardAdapter = new ItemAdapter(Context, Items, init.AddBasket); // создаём адаптер с новыми товарами
             CardList.setAdapter(CardAdapter); // применяем адаптер
         }
     };

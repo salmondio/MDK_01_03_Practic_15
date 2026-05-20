@@ -1,7 +1,7 @@
 package com.example.practic_15.Classes.Models;
 
 public class Item {
-    public int id;
+    public int Id;
     public String Name;
     public String Model;
     public Integer Price;

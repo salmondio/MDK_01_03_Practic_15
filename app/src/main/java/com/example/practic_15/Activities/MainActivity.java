@@ -1,5 +1,6 @@
 package com.example.practic_15.Activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +13,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,11 +25,16 @@ import com.example.practic_15.Classes.Adapters.ItemAdapter;
 import com.example.practic_15.Classes.Contexts.CategoryContext;
 import com.example.practic_15.Classes.Contexts.ItemContext;
 import com.example.practic_15.Classes.IOnClickInterface;
+import com.example.practic_15.Classes.Models.Basket;
 import com.example.practic_15.Classes.Models.Category;
 import com.example.practic_15.Classes.Models.Item;
 import com.example.practic_15.R;
 
 public class MainActivity extends AppCompatActivity {
+
+    public ArrayList<Basket> BasketList = new ArrayList<Basket>();
+    public ArrayList<Item> Items;
+    public static MainActivity init;
     public Context Context; // ссылка на контекст
 
     @Override
@@ -36,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Context = this; // запоминаем контекст
+        init = this;
 
         ArrayList<Category> Categorys = CategoryContext.All(); // получаем категории
-        ArrayList<Item> Items = ItemContext.All(); // получаем товары
+        Items = ItemContext.All(); // получаем товары
 
         RecyclerView CategoryList = findViewById(R.id.category_list); // получаем recyclerView для категорий
         RecyclerView CardList = findViewById(R.id.card_list); // получаем recyclerView для товаров
@@ -46,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         CategoryAdapter CategoryAdapter = new CategoryAdapter(this, Categorys, Click); // Создаём адаптер для категорий
         CategoryList.setAdapter(CategoryAdapter); // назначаем адаптер для категорий
 
-        ItemAdapter CardAdapter = new ItemAdapter(this, Items); // Создаём адаптер для предметов
+        ItemAdapter CardAdapter = new ItemAdapter(this, Items, AddBasket); // Создаём адаптер для предметов
         CardList.setAdapter(CardAdapter); // назначаем адаптер для предметов
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction(); // создаём транзакцию для фрагмента
@@ -67,6 +76,28 @@ public class MainActivity extends AppCompatActivity {
             Intent newIntent = new Intent(Context, PopularActivity.class); // создаём интент
             newIntent.putExtra("Category", position); // запоминаем категорию
             startActivity(newIntent); // открываем активность
+        }
+    };
+
+    public IOnClickInterface AddBasket = new IOnClickInterface() {
+        @Override
+        public void setClick(View view, int position) {
+            Basket Item = BasketList.stream()
+                    .filter(item -> item.Item.Id == position)
+                    .findAny()
+                    .orElse(null);
+            Item FindItem = Items.stream().filter(item -> item.Id == position)
+                    .findAny()
+                    .orElse(null);
+            if(Item == null){
+                Item = new Basket(FindItem, 1);
+                BasketList.add(Item);
+            }
+            else
+                Item.Count++;
+
+            Toast.makeText(Context, "Товар был добален в корзину", Toast.LENGTH_SHORT).show();
+
         }
     };
 }
