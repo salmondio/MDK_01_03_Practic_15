@@ -100,4 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
     };
+
+    public void OpenBasketView(View view){
+        Intent newIntent = new Intent(this, BasketActivity.class);
+        startActivity(newIntent);
+    }
 }
